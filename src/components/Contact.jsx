@@ -7,13 +7,17 @@ import { EarthCanvas } from "./canvas";
 import { SectionWrapper } from "../hoc";
 import { slideIn } from "../utils/motion";
 
+const initialValue = {
+  from_name: "",
+  from_email: "",
+  message: "",
+  to_name: "Nisar Shaikh",
+  to_email: "shaikh.nisar76@gmail.com",
+};
+
 const Contact = () => {
   const formRef = useRef();
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+  const [form, setForm] = useState(initialValue);
 
   const [loading, setLoading] = useState(false);
 
@@ -35,13 +39,7 @@ const Contact = () => {
       .send(
         import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
         import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
-        {
-          from_name: form.name,
-          to_name: "JavaScript Mastery",
-          from_email: form.email,
-          to_email: "sujata@jsmastery.pro",
-          message: form.message,
-        },
+        form,
         import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
       )
       .then(
@@ -49,11 +47,7 @@ const Contact = () => {
           setLoading(false);
           alert("Thank you. I will get back to you as soon as possible.");
 
-          setForm({
-            name: "",
-            email: "",
-            message: "",
-          });
+          setForm(initialValue);
         },
         (error) => {
           setLoading(false);
@@ -84,7 +78,7 @@ const Contact = () => {
             <span className='text-white font-medium mb-4'>Your Name</span>
             <input
               type='text'
-              name='name'
+              name='from_name'
               value={form.name}
               onChange={handleChange}
               placeholder="What's your good name?"
@@ -95,7 +89,7 @@ const Contact = () => {
             <span className='text-white font-medium mb-4'>Your email</span>
             <input
               type='email'
-              name='email'
+              name='from_email'
               value={form.email}
               onChange={handleChange}
               placeholder="What's your web address?"
