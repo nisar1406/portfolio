@@ -80,7 +80,8 @@ const SocialMedia = () => {
       viewport={{ once: true, amount: 0.25 }}
       className={`${styles.padding} max-w-7xl mx-auto relative z-0`}
     >
-      <div className="absolute xs:bottom-10 bottom-32 w-full flex items-center">
+      <span className="hash-span">&nbsp;</span>
+      <div className="absolute xs:bottom-10 bottom-20 w-full flex items-center">
         <Link to="https://github.com/nisar1406" target="blank">
           <motion.div
             className="social-icon flex items-center"
